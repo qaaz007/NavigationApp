@@ -9,12 +9,36 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var timer = NSTimer()
+    var count = 0
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    func update() {
+        count++
+        timeLabel.text = String(count);
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
+    @IBAction func startTimer(sender: AnyObject) {
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+    }
+    
+    @IBAction func stopTimer(sender: AnyObject) {
+        timer.invalidate()
+        count = 0;
+        timeLabel.text = String(count)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
+
+    @IBAction func paseTimer(sender: AnyObject) {
+        timer.invalidate()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
